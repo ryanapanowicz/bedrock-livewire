@@ -73,7 +73,7 @@ add_action('init', function () {
                     string $content = '',
                     bool $is_preview = false,
                     int $post_id = 0,
-                    WP_Block $wp_block = null,
+                    ?WP_Block $wp_block = null,
                     array $context = []
                 ) {
                     $slug = str_replace('test'.'/', '', $block['name']);

@@ -35,7 +35,6 @@ class ComposerStaticInit440427dceabde644447d66e3ea9e2b56
     );
 
     public static $classMap = array (
-        'App\\Livewire\\PostSearch' => __DIR__ . '/../..' . '/app/Livewire/PostSearch.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 

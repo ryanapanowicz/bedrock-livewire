@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "test/post-explorer",
+  "version": "1.0.0",
+  "title": "Post Explorer",
+  "keywords": [
+    "livewire",
+    "posts",
+    "filters"
+  ],
+  "acf": {
+    "blockVersion": 3,
+    "autoJsonLd": true,
+    "mode": "preview",
+    "autoInlineEditing": true,
+    "hideFieldsInSidebar": true,
+    "expandedEditorButtonText": "Edit Post Explorer"
+  },
+  "allowedBlocks": [
+    "core/paragraph",
+    "core/heading"
+  ],
+  "category": "theme",
+  "icon": "screenoptions",
+  "description": "A post explorer block with URL-synced filters and animated post results.",
+  "example": {},
+  "supports": {
+    "jsx": true,
+    "mode": "edit",
+    "html": false
+  },
+  "textdomain": "sage",
+  "style": "file:./style.css"
+}

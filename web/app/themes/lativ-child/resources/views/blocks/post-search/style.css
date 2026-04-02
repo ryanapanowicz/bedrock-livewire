@@ -2,15 +2,34 @@
     position: relative;
 }
 
+.post-search-field {
+    position: relative;
+}
+
 .post-search-input {
     font-size: 14px;
     padding: 18px 20px;
     border: 1px solid #ddd;
     border-radius: 30px;
+    transition: opacity 0.2s ease;
 }
 
 .post-search-input:focus {
     outline: none;
+}
+
+.post-search-loading {
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    width: 16px;
+    height: 16px;
+    margin-top: -8px;
+    border: 2px solid #ddd;
+    border-top-color: #666;
+    border-radius: 50%;
+    animation: post-search-spin 0.7s linear infinite;
 }
 
 .post-search-results-wrapper {
@@ -27,6 +46,7 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     text-wrap: nowrap;
+    transition: opacity 0.2s ease;
 }
 
 .post-search-results-list {
@@ -58,4 +78,38 @@
 .post-search-results-list li a:hover {
     background: #eee;
     text-decoration: underline;
+}
+
+.post-search-wrapper:has(.post-search-input[data-loading]) .post-search-input,
+.post-search-wrapper:has(.post-search-input[data-loading]) .post-search-results {
+    opacity: 0.6;
+}
+
+.post-search-wrapper:has(.post-search-input[data-loading]) .post-search-loading {
+    display: block;
+}
+
+@keyframes post-search-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+input[type="search"]::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+input[type="search"]::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
 }
