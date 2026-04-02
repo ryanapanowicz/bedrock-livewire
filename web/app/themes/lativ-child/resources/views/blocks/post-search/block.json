@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "test/post-search",
+  "version": "1.0.0",
+  "title": "Post Search",
+  "keywords": [
+    "example",
+    "block"
+  ],
+  "acf": {
+    "mode": "preview"
+  },
+  "category": "theme",
+  "icon": "search",
+  "description": "A post search block.",
+  "example": {},
+  "supports": {
+    "mode": "edit",
+    "html": false
+  },
+  "textdomain": "sage",
+  "style": [
+    "file:./style.css",
+    "search-block-style"
+  ]
+}

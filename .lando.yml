@@ -1,0 +1,27 @@
+name: bedrock-livewire
+recipe: wordpress
+config:
+  webroot: web
+  php: '8.4'
+  via: apache
+
+services:
+  database:
+    type: mariadb:10.11
+    portforward: 9001
+
+    ## Node (ref: https://docs.lando.dev/node/)
+    node:
+      type: node:22
+
+## Proxy (ref: https://docs.lando.dev/lando-101/lando-proxy.html)
+proxy:
+  appserver:
+    - bedrock-livewire.lndo.site
+
+## Tooling (ref: https://docs.lando.dev/core/v3/tooling.html)
+tooling:
+  node:
+    service: node
+  npm:
+    service: node
