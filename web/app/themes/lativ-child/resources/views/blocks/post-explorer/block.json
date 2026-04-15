@@ -25,7 +25,49 @@
   "icon": "screenoptions",
   "description": "A post explorer block with URL-synced filters and animated post results.",
   "example": {},
+  "attributes": {
+    "style": {
+      "type": "object",
+      "default": {
+        "spacing": {
+          "margin": "0px",
+          "padding": "0px"
+        },
+        "typography": {
+          "fontSize": "1rem",
+          "lineHeight": "1.6"
+        },
+        "border": {
+          "radius": "28px"
+        }
+      }
+    }
+  },
   "supports": {
+    "align": [
+      "wide",
+      "full"
+    ],
+    "anchor": true,
+    "color": {
+      "background": true,
+      "text": true,
+      "gradients": true,
+      "link": true,
+      "heading": true
+    },
+    "dimensions": {
+      "minHeight": true
+    },
+    "shadow": true,
+    "spacing": {
+      "margin": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "textAlign": true
+    },
     "jsx": true,
     "mode": "edit",
     "html": false

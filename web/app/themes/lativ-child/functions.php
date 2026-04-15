@@ -94,3 +94,8 @@ add_action('init', function () {
         }
     }
 });
+
+/**
+ * Remove the "No fields assigned" message from ACF blocks.
+ */
+add_filter( 'acf/blocks/no_fields_assigned_message', '__return_empty_string' );

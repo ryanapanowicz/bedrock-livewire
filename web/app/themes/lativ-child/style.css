@@ -14,3 +14,132 @@
 * Tags: blog, news, one-column, three-columns, wide-blocks, block-patterns, custom-colors, custom-logo, custom-menu, editor-style, featured-images, flexible-header, full-site-editing, rtl-language-support, theme-options, threaded-comments, translation-ready, business, startup, style-variations
 * Template: lativ
 */
+
+/* Prevent link clicks on acf preview blocks */
+.acf-block-preview {
+    a, button:not(.block-editor-button-block-appender), input {
+        pointer-events: none;
+    }
+}
+
+.acf-block-preview .post-explorer.post-explorer-shell {
+    border-radius: inherit;
+    box-shadow: inherit;
+}
+
+.acf-block-preview:is([style*="background"], [class*="has-"][class*="-background-color"]) .post-explorer.post-explorer-shell {
+    background-color: inherit;
+}
+
+.acf-block-preview:is([style*="background-image"], [style*="gradient"], [class*="has-"][class*="-gradient-background"]) .post-explorer.post-explorer-shell {
+    background-image: inherit;
+}
+
+.acf-block-preview:is([style*="color"], [class*="has-"][class*="-color"]) .post-explorer.post-explorer-shell {
+    color: inherit;
+}
+
+.post-explorer {
+    --post-explorer-bg: var(--wp--preset--color--background);
+    --post-explorer-surface: color-mix(in srgb, var(--wp--preset--color--background) 72%, white 28%);
+    --post-explorer-border: color-mix(in srgb, var(--wp--preset--color--primary) 14%, transparent);
+    --post-explorer-shadow: 0 24px 60px color-mix(in srgb, var(--wp--preset--color--primary) 12%, transparent);
+    --post-explorer-input-bg: var(--post-explorer-surface);
+    --post-explorer-input-focus-bg: color-mix(in srgb, var(--post-explorer-surface) 88%, white 12%);
+    --post-explorer-focus-ring: var(--wp--preset--color--primary);
+    --post-explorer-select-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none'%3E%3Cpath d='M1 1.5L7 7.5L13 1.5' stroke='%230b303b' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    --post-explorer-card-hover-shadow: 0 30px 70px color-mix(in srgb, var(--wp--preset--color--primary) 16%, transparent);
+    --post-explorer-card-glint: conic-gradient(
+        from 0deg,
+        transparent 0deg 140deg,
+        color-mix(in srgb, var(--wp--preset--color--custom-orange) 88%, transparent) 160deg,
+        color-mix(in srgb, var(--wp--preset--color--background) 96%, transparent) 300deg,
+        color-mix(in srgb, var(--wp--preset--color--custom-purple) 54%, transparent) 352deg,
+        transparent 360deg
+    );
+}
+
+.post-explorer-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, color-mix(in srgb, var(--wp--preset--color--custom-purple) 16%, transparent), transparent 26%),
+        radial-gradient(circle at bottom left, color-mix(in srgb, var(--wp--preset--color--custom-orange) 18%, transparent), transparent 28%);
+    pointer-events: none;
+}
+
+.post-explorer[class*="-gradient-background"]::before,
+.post-explorer[style*="gradient"]::before,
+.post-explorer[style*="background-image"]::before {
+    opacity: 0.24;
+}
+
+.post-explorer-card:nth-child(6n + 1) {
+    background: var(--wp--preset--color--custom-green);
+    border-color: transparent;
+}
+
+.post-explorer-card:nth-child(6n + 2) {
+    background: var(--wp--preset--color--primary);
+    border-color: transparent;
+    color: var(--wp--preset--color--background);
+}
+
+.post-explorer-card:nth-child(6n + 3) {
+    background: var(--wp--preset--color--background);
+}
+
+.post-explorer-card:nth-child(6n + 4) {
+    background: var(--wp--preset--color--custom-purple);
+    border-color: transparent;
+    color: var(--wp--preset--color--background);
+}
+
+.post-explorer-card:nth-child(6n + 5) {
+    background: var(--wp--preset--color--tertiary);
+    border-color: transparent;
+}
+
+.post-explorer-card:nth-child(6n) {
+    background: color-mix(in srgb, var(--wp--preset--color--custom-orange) 22%, var(--wp--preset--color--background));
+    border-color: transparent;
+}
+
+.post-explorer-card:is(:nth-child(6n + 2), :nth-child(6n + 4)) :is(.post-explorer-card-meta, .post-explorer-card-taxonomy a, .post-explorer-card-excerpt) {
+    color: color-mix(in srgb, var(--wp--preset--color--background) 82%, transparent);
+}
+
+.post-explorer:not([class*="wp-elements-"]):not([style*="--post-explorer-heading-color"]) .post-explorer-card:is(:nth-child(6n + 2), :nth-child(6n + 4)) .post-explorer-card-title span {
+    color: var(--wp--preset--color--background);
+}
+
+.post-explorer-card:is(:nth-child(6n + 2), :nth-child(6n + 4)) {
+    --post-explorer-card-glint: conic-gradient(
+        from 0deg,
+        transparent 0deg 132deg,
+        color-mix(in srgb, white 94%, transparent) 154deg,
+        color-mix(in srgb, var(--wp--preset--color--background) 100%, transparent) 222deg,
+        color-mix(in srgb, var(--wp--preset--color--custom-green) 78%, transparent) 308deg,
+        color-mix(in srgb, white 100%, transparent) 344deg,
+        transparent 360deg
+    );
+}
+
+.post-explorer-card:is(:nth-child(6n + 2), :nth-child(6n + 4))::after {
+    filter: saturate(1.2) brightness(1.15) invert(0.06);
+}
+
+.post-search {
+    --post-search-surface: var(--wp--preset--color--background);
+    --post-search-surface-alt: color-mix(in srgb, var(--wp--preset--color--background) 76%, white 24%);
+    --post-search-border: color-mix(in srgb, var(--wp--preset--color--primary) 14%, transparent);
+    --post-search-text: var(--wp--preset--color--foreground);
+    --post-search-muted: color-mix(in srgb, var(--wp--preset--color--foreground) 72%, white 28%);
+    --post-search-accent: var(--wp--preset--color--primary);
+    --post-search-shadow: 0 24px 60px color-mix(in srgb, var(--wp--preset--color--primary) 12%, transparent);
+    --post-search-font-family: var(--wp--preset--font-family--sora);
+    --post-search-font-size: var(--wp--preset--font-size--small);
+    --post-search-font-weight: 200;
+    --post-search-input-focus-bg: color-mix(in srgb, var(--post-search-surface-alt) 88%, white 12%);
+    --post-search-hover-bg: var(--wp--preset--color--tertiary);
+}

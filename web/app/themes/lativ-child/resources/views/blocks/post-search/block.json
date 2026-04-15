@@ -16,7 +16,7 @@
   "description": "A post search block.",
   "example": {},
   "supports": {
-    "mode": "edit",
+    "mode": false,
     "html": false
   },
   "textdomain": "sage",

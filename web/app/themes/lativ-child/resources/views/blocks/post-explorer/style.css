@@ -3,33 +3,66 @@
 }
 
 .post-explorer {
-    --post-explorer-bg: #f6f2ea;
-    --post-explorer-surface: rgba(255, 255, 255, 0.82);
-    --post-explorer-border: rgba(36, 52, 44, 0.14);
-    --post-explorer-text: #1d2b25;
-    --post-explorer-muted: #607066;
-    --post-explorer-accent: #1f6b53;
-    --post-explorer-accent-soft: #e1efe8;
-    --post-explorer-warning: #8d5d00;
+    --post-explorer-bg: #fff;
+    --post-explorer-surface: #f6f6f6;
+    --post-explorer-border: rgba(0, 0, 0, 0.12);
+    --post-explorer-text: currentColor;
+    --post-explorer-muted: color-mix(in srgb, currentColor 72%, transparent);
+    --post-explorer-accent: currentColor;
+    --post-explorer-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
+    --post-explorer-font-family: inherit;
+    --post-explorer-font-size: inherit;
+    --post-explorer-font-weight: inherit;
+    --post-explorer-line-height: inherit;
+    --post-explorer-heading-color: currentColor;
+    --post-explorer-body-color: currentColor;
+    --post-explorer-link-color: currentColor;
+    --post-explorer-heading-size: clamp(1.75em, 3vw, 2.75em);
+    --post-explorer-card-title-size: clamp(1.35em, 2vw, 1.75em);
+    --post-explorer-empty-title-size: clamp(1.15em, 2vw, 1.5em);
+    --post-explorer-shell-radius: 28px;
+    --post-explorer-card-radius: 20px;
+    --post-explorer-input-radius: 999px;
+    --post-explorer-input-bg: var(--post-explorer-surface);
+    --post-explorer-input-focus-bg: var(--post-explorer-input-bg);
+    --post-explorer-focus-ring: var(--post-explorer-accent);
+    --post-explorer-select-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none'%3E%3Cpath d='M1 1.5L7 7.5L13 1.5' stroke='%231f1f1f' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    --post-explorer-card-hover-shadow: var(--post-explorer-shadow);
+    --post-explorer-card-glint: conic-gradient(
+        from 0deg,
+        transparent 0deg 140deg,
+        rgba(255, 196, 108, 0.92) 140deg,
+        rgba(255, 255, 255, 0.98) 300deg,
+        rgba(255, 196, 108, 0.92) 356deg,
+        transparent 360deg
+    );
+    --post-explorer-card-glint-size: 200%;
+    --post-explorer-card-border-width: 2px;
+    --post-explorer-card-padding: 1.5rem;
     color: var(--post-explorer-text);
+    font-family: var(--post-explorer-font-family);
+    font-size: var(--post-explorer-font-size);
+    font-style: normal;
+    font-weight: var(--post-explorer-font-weight);
+    line-height: var(--post-explorer-line-height);
+}
+
+.post-explorer a {
+    color: var(--post-explorer-link-color);
 }
 
 .post-explorer-shell {
     position: relative;
+    isolation: isolate;
     overflow: hidden;
-    padding: 28px;
-    border-radius: 28px;
-    background: var(--post-explorer-bg);
-    box-shadow: 0 24px 60px rgba(31, 45, 38, 0.08);
+    padding: clamp(1.5rem, 2vw, 2rem);
+    border-radius: var(--post-explorer-shell-radius);
+    background-color: var(--post-explorer-bg);
+    box-shadow: var(--post-explorer-shadow);
 }
 
 .post-explorer-shell::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at top right, rgba(127, 17, 224, 0.1), transparent 20%),
-    radial-gradient(circle at bottom left, rgba(240, 209, 211, 0.16), transparent 20%);
-    pointer-events: none;
+    border-radius: inherit;
 }
 
 .post-explorer-header,
@@ -41,65 +74,78 @@
     z-index: 1;
 }
 
-.post-explorer-header {
-    max-width: 54rem;
+.post-explorer-header > * + * {
+    margin-top: 0.875rem;
 }
 
-.post-explorer-header > * + * {
-    margin-top: 14px;
+.post-explorer-eyebrow,
+.post-explorer-field span,
+.post-explorer-card-meta,
+.post-explorer-card-taxonomy a {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.post-explorer-header p,
+.post-explorer-meta p,
+.post-explorer-card-meta,
+.post-explorer-card-excerpt,
+.post-explorer-empty p {
+    margin: 0;
+}
+
+.post-explorer-header p,
+.post-explorer-card-excerpt,
+.post-explorer-empty p {
+    color: var(--post-explorer-body-color);
 }
 
 .post-explorer-eyebrow {
     margin: 0 0 10px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
     color: var(--post-explorer-accent);
 }
 
 .post-explorer-title {
     margin: 0;
-    font-size: clamp(28px, 3vw, 44px);
-    line-height: 1;
+    color: var(--post-explorer-heading-color);
+    font-size: var(--post-explorer-heading-size);
+    font-weight: 400;
+    line-height: 1.125;
 }
 
 .post-explorer-toolbar {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-    gap: 14px;
-    margin-top: 24px;
+    gap: 1rem;
+    margin-top: 1.5rem;
 }
 
 .post-explorer-field {
     display: grid;
-    gap: 8px;
-}
-
-.post-explorer-field span {
-    font-size: 13px;
-    font-weight: 600;
+    gap: 0.5rem;
 }
 
 .post-explorer-input,
 .post-explorer-select {
     width: 100%;
     border: 1px solid var(--post-explorer-border);
-    border-radius: 14px;
-    padding: 14px 16px;
-    background: var(--post-explorer-surface);
+    border-radius: var(--post-explorer-input-radius);
+    padding: 0.95rem 1.25rem;
+    background: var(--post-explorer-input-bg);
     color: var(--post-explorer-text);
     font: inherit;
-    transition: border-color 0.2s ease, opacity 0.2s ease;
+    line-height: 1.6;
+    transition: border-color 0.2s ease, background-color 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
 }
 
 .post-explorer-select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    padding: 14px 48px 14px 16px;
-    background: var(--post-explorer-surface);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none'%3E%3Cpath d='M1 1.5L7 7.5L13 1.5' stroke='%231d2b25' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    padding: 0.95rem 3rem 0.95rem 1.25rem;
+    background-image: var(--post-explorer-select-icon);
     background-position: right 18px center;
     background-repeat: no-repeat;
     background-size: 14px 9px;
@@ -108,33 +154,40 @@
 .post-explorer-input:focus,
 .post-explorer-select:focus {
     outline: none;
-    border-color: rgba(31, 107, 83, 0.45);
+    border-color: var(--post-explorer-accent);
+    background: var(--post-explorer-input-focus-bg);
+    box-shadow: 0 0 0 1px var(--post-explorer-focus-ring);
+}
+
+.post-explorer-input::placeholder {
+    color: var(--post-explorer-muted);
 }
 
 .post-explorer-meta {
     display: flex;
-    gap: 12px;
+    gap: 0.75rem;
     justify-content: space-between;
     align-items: center;
-    margin-top: 16px;
+    margin-top: 1rem;
     color: var(--post-explorer-muted);
     flex-wrap: wrap;
 }
 
-.post-explorer-meta p {
-    margin: 0;
+.post-explorer-meta strong {
+    color: var(--post-explorer-accent);
+    font-weight: 500;
 }
 
 .post-explorer-card-taxonomy {
-    margin: 0 0 10px 0;
+    position: relative;
+    z-index: 3;
+    margin: 0 0 0.625rem;
 }
 
 .post-explorer-card-taxonomy a {
+    position: relative;
+    z-index: 4;
     color: var(--post-explorer-muted);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
     text-decoration: none;
 }
 
@@ -144,65 +197,135 @@
 
 .post-explorer-loading {
     display: none;
-    width: 14px;
-    height: 14px;
-    border: 2px solid rgba(31, 107, 83, 0.18);
+    inline-size: 14px;
+    block-size: 14px;
+    border: 2px solid color-mix(in srgb, var(--post-explorer-accent) 20%, transparent);
     border-top-color: var(--post-explorer-accent);
     border-radius: 50%;
     animation: post-explorer-spin 0.7s linear infinite;
 }
 
 .post-explorer-results {
-    margin-top: 18px;
+    margin-top: 1.125rem;
 }
 
 .post-explorer-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
+    gap: 1rem;
 }
 
 .post-explorer-card,
 .post-explorer-empty {
-    padding: 20px;
-    border-radius: 22px;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--post-explorer-card-radius);
     background: var(--post-explorer-surface);
-    backdrop-filter: blur(10px);
+    isolation: isolate;
+}
+
+.post-explorer-empty {
+    padding: var(--post-explorer-card-padding);
+}
+
+.post-explorer-card::after {
+    content: "";
+    position: absolute;
+    top: -80%;
+    left: -50%;
+    width: var(--post-explorer-card-glint-size);
+    aspect-ratio: 1;
+    background: var(--post-explorer-card-glint);
+    opacity: 0;
+    pointer-events: none;
+    transform: rotate(0deg);
+    transform-origin: center;
+    animation: post-explorer-card-glint-spin 5.8s linear infinite paused;
+    transition: opacity 0.25s ease;
+}
+
+.post-explorer-card::before {
+    content: "";
+    position: absolute;
+    inset: var(--post-explorer-card-border-width);
+    border-radius: calc(var(--post-explorer-card-radius) - var(--post-explorer-card-border-width));
+    background: inherit;
+    background-clip: padding-box;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.post-explorer-card:hover,
+.post-explorer-card:focus-within {
+    box-shadow: var(--post-explorer-card-hover-shadow);
+}
+
+.post-explorer-card:hover::after,
+.post-explorer-card:focus-within::after {
+    opacity: 1;
+    animation-play-state: running;
+}
+
+.post-explorer-card-link {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+}
+
+.post-explorer-card-inner {
+    position: relative;
+    z-index: 2;
+    margin: var(--post-explorer-card-border-width);
+    padding: var(--post-explorer-card-padding);
+    border-radius: calc(var(--post-explorer-card-radius) - var(--post-explorer-card-border-width));
+    background: inherit;
+    background-clip: padding-box;
+    pointer-events: none;
+}
+
+.post-explorer-card-taxonomy,
+.post-explorer-card-taxonomy * {
+    pointer-events: auto;
 }
 
 .post-explorer-card-meta {
-    margin: 0;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
     color: var(--post-explorer-accent);
 }
 
+.post-explorer-card-title,
+.post-explorer-empty h3 {
+    color: var(--post-explorer-heading-color);
+    font-weight: 400;
+    line-height: 1.125;
+}
+
 .post-explorer-card-title {
-    margin: 12px 0 10px;
-    font-size: 22px;
-    line-height: 1.1;
+    margin: 0.75rem 0 0.625rem;
+    font-size: var(--post-explorer-card-title-size);
 }
 
-.post-explorer-card-title a {
+.post-explorer-card-title span {
     color: inherit;
-    text-decoration: none;
-}
-
-.post-explorer-card-title a:hover {
-    text-decoration: underline;
 }
 
 .post-explorer-card-excerpt,
 .post-explorer-empty p {
-    margin: 0;
     color: var(--post-explorer-muted);
 }
 
 .post-explorer-empty h3 {
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
+    font-size: var(--post-explorer-empty-title-size);
+}
+
+.post-explorer-footer {
+    margin-top: 3rem;
+}
+
+.post-explorer-footer > * {
+    margin: 0;
 }
 
 .post-explorer-controls:has(.post-explorer-input[data-loading]) .post-explorer-loading,
@@ -211,6 +334,12 @@
 }
 
 @keyframes post-explorer-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes post-explorer-card-glint-spin {
     to {
         transform: rotate(360deg);
     }
@@ -225,7 +354,7 @@
 
 @media (max-width: 640px) {
     .post-explorer-shell {
-        padding: 20px;
+        padding: 1.25rem;
         border-radius: 22px;
     }
 

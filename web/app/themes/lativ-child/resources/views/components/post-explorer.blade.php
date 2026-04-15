@@ -179,18 +179,21 @@ new class extends Component {
             <div class="post-explorer-grid">
                 @foreach ($this->posts as $post)
                     <article wire:transition class="post-explorer-card" wire:key="post-explorer-{{ $post->ID }}">
-                        <p class="post-explorer-card-meta">
-                            {{ get_the_date('M j, Y', $post) }}
-                        </p>
-                        <h3 class="post-explorer-card-title">
-                            <a href="{{ get_permalink($post->ID) }}">{{ $post->post_title }}</a>
-                        </h3>
-                        <p class="post-explorer-card-taxonomy">
-                            {!! get_the_category_list(', ', '', $post) !!}
-                        </p>
-                        <p class="post-explorer-card-excerpt">
-                            {{ wp_trim_words(wp_strip_all_tags(get_the_excerpt($post)), 24) }}
-                        </p>
+                        <a class="post-explorer-card-link" href="{{ get_permalink($post->ID) }}" aria-label="Read {{ esc_attr($post->post_title) }}"></a>
+                        <div class="post-explorer-card-inner">
+                            <p class="post-explorer-card-meta">
+                                {{ get_the_date('M j, Y', $post) }}
+                            </p>
+                            <h3 class="post-explorer-card-title">
+                                <span>{{ $post->post_title }}</span>
+                            </h3>
+                            <p class="post-explorer-card-taxonomy">
+                                {!! get_the_category_list(', ', '', $post) !!}
+                            </p>
+                            <p class="post-explorer-card-excerpt">
+                                {!! wp_trim_words(wp_strip_all_tags(get_the_excerpt($post)), 24) !!}
+                            </p>
+                        </div>
                     </article>
                 @endforeach
             </div>
