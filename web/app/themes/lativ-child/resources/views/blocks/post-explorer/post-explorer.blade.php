@@ -17,7 +17,7 @@
         ],
     ]);
 @endphp
-<section {!! $is_preview ? 'class="post-explorer post-explorer-shell post-explorer-block"' : wp_kses_data(get_block_wrapper_attributes(['class' => 'post-explorer post-explorer-shell post-explorer-block'])) !!}>
+<section {!! $is_preview ? 'class="post-explorer post-explorer-shell post-explorer-block"' : get_block_wrapper_attributes(['class' => 'post-explorer post-explorer-shell post-explorer-block']) !!}>
     <div class="post-explorer-header">
         <p class="post-explorer-eyebrow" @php acf_inline_text_editing_attrs('eyebrow'); @endphp>
             {{ get_field('eyebrow') }}
