@@ -9,7 +9,7 @@ new class extends Component {
     /**
      * The empty state message loaded from ACF.
      */
-    public string $emptyMessage = 'Try a broader search term or reset the filters.';
+    public ?string $emptyMessage;
 
     /**
      * The filters loaded from ACF.
@@ -24,7 +24,7 @@ new class extends Component {
     /**
      * The default sort option.
      */
-    public string $defaultSort = 'latest';
+    public ?string $defaultSort;
 
     /**
      * The search query.
@@ -55,6 +55,9 @@ new class extends Component {
      */
     public function mount(): void
     {
+        $this->emptyMessage ??= 'Try a broader search term or reset the filters.';
+        $this->defaultSort ??= 'latest';
+
         if (!request()->has('per_page')) {
             $this->perPage = $this->defaultPerPage;
         }
@@ -179,7 +182,8 @@ new class extends Component {
             <div class="post-explorer-grid">
                 @foreach ($this->posts as $post)
                     <article wire:transition class="post-explorer-card" wire:key="post-explorer-{{ $post->ID }}">
-                        <a class="post-explorer-card-link" href="{{ get_permalink($post->ID) }}" aria-label="Read {{ esc_attr($post->post_title) }}"></a>
+                        <a class="post-explorer-card-link" href="{{ get_permalink($post->ID) }}"
+                           aria-label="Read {{ esc_attr($post->post_title) }}"></a>
                         <div class="post-explorer-card-inner">
                             <p class="post-explorer-card-meta">
                                 {{ get_the_date('M j, Y', $post) }}

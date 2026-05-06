@@ -20,12 +20,12 @@ if (!file_exists($composer = __DIR__.'/vendor/autoload.php')) {
  */
 require $composer;
 
-use Illuminate\Support\Facades\Blade;
+use Roots\Acorn\Application;
 
 /**
  * Die if Acorn is not installed.
  */
-if (!function_exists('\Roots\bootloader')) {
+if (!class_exists(Application::class)) {
     wp_die(
         __('You need to install Acorn to use this site.', 'domain'),
         '',
@@ -39,63 +39,27 @@ if (!function_exists('\Roots\bootloader')) {
 /**
  * Bootstraps WordPress with Acorn.
  */
-add_action('after_setup_theme', fn() => Roots\bootloader()->boot());
+Application::configure()
+    ->withRouting(wordpress: true)
+    ->boot();
 
-/**
- * Add Livewire styles
- */
-add_filter('wp_head', function () {
-    echo Blade::render('@livewireStyles');
-});
-
-/**
- * Add Livewire scripts
- */
-add_filter('wp_footer', function () {
-    echo Blade::render('@livewireScripts');
-});
-
-/**
- * Register Gutenberg blocks.
- */
-add_action('init', function () {
-    // Directory containing the blocks, within the 'resources/views' directory.
-    $directory = resource_path('views').'/blocks/';
-
-    // Iterate over the directory provided and look for blocks.
-    $block_directory = new DirectoryIterator($directory);
-
-    foreach ($block_directory as $block) {
-        if ($block->isDir() && !$block->isDot()) {
-            register_block_type($block->getRealpath(), [
-                'render_callback' => function (
-                    array $block,
-                    string $content = '',
-                    bool $is_preview = false,
-                    int $post_id = 0,
-                    ?WP_Block $wp_block = null,
-                    array $context = []
-                ) {
-                    $slug = str_replace('test'.'/', '', $block['name']);
-                    $block['slug'] = $slug;
-                    echo \Roots\view(
-                        'blocks.'.$block['slug'].'.'.$block['slug'],
-                        compact(
-                            'block',
-                            'content',
-                            'is_preview',
-                            'post_id',
-                            'wp_block',
-                            'context'
-                        )
-                    );
-                }
-            ]);
+/*
+|--------------------------------------------------------------------------
+| Register Sage Theme Files
+|--------------------------------------------------------------------------
+|
+| Out of the box, Sage ships with categorically named theme files
+| containing common functionality and setup to be bootstrapped with your
+| theme. Simply add (or remove) files from the array below to change what
+| is registered alongside Sage.
+|
+*/
+collect(['setup', 'filters', 'blocks'])
+    ->each(function ($file) {
+        if (!locate_template($file = "app/{$file}.php", true)) {
+            wp_die(
+                /* translators: %s is replaced with the relative file path */
+                sprintf(__('Error locating <code>%s</code> for inclusion.', 'sage'), $file)
+            );
         }
-    }
-});
-
-/**
- * Remove the "No fields assigned" message from ACF blocks.
- */
-add_filter( 'acf/blocks/no_fields_assigned_message', '__return_empty_string' );
+    });
